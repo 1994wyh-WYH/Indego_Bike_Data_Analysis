@@ -1,0 +1,18 @@
+The program is comprised of 7 classes. 
+
+The trip class represents the trip object, with attributes included in the .csv file. Similarly, the station class represents the station object with attributes in the file.
+
+There are two file reader classes, IndegoBikeTripReader and IndegoBikeStationreader for reading the trip and station information. The two readers form two hashtables for storing the trip and station informations. Here I use HashMap structure just for the consideration of future data management. Each trip or station has a unique ID that determines other associated attributes, so the data analyzer can always use the IDs as keys to search a specific trip/station.
+Notice that the trips with invalid information are still put into the data set, for part of their information can still be valid. If not, the percentage calculation or number counting will be affected.
+Two getters of the trips and stations hashMap were added after the CRC design, for letting other class to cooperate with the readers.
+
+The IndegoBikeDataAnalyzer class contains all the methods for answering the requested questions as well as the wild card question. 
+countOneWay() uses a simple loop through trips to count all the one-way trips.countActive() uses a simple loopthrough stations to count to active stations.countPercentageOfSpecificStationEndedTrip(Station) uses a loop to find the trips corresponding a specific station and return the counter divided by the total trip size.getMostPopularMonth() creates an array to record the appearance frequency of each month, and loops through the array to find the largest number.getIDOfLongestDuration() uses a simple loop to find the bike ID with maximum duration. Simply replace the max with larger ones during looping.countPercentageOfTripsDuring(Time1, Time2) uses total minutes of the day to be the indicator of comparison. Loop through the trips and count desired trips, return the divided ratio.countNumOfBikesAtATime(Time) simply loops through trips and find how many bikes were being used in a trip happened at a specific time. Because each bike can only be used by one trip at a certain time, counting bikes in this case is equivalent to counting trips.
+euclideanDistance() returns the Euclidean distances between two points. This method is not in the original CRC but was created for simplifying other methods.printLongestTrip() loops through trips to find the one with the longest Euclidean distance, using the euclideanDistance() function. Print all information.countTripsWithOnlyGoLiveStation() creates a hashing between go-live dates and the stations that has it to be its go-live date. Select station IDs of which station is the only station to go on its go-live date, then loop through trips to count trips that involve the selected stations.countPercentageOfPlanDurationOf() is involved with the wild card question. It returns the percentage of trips having a plan duration of a given plan duration. The wild card question asks for 30. Simply loop through trips to count trips with plan duration of 30.
+
+IndegoBikeDataSummary() is for writing the station information summary file and the extra credit questions. The private variable of stations and relationships that connect a station and all trips that have the station as start/end station are not in the original CRC. They are created for convenience of writing methods.
+For each desired attribute of the station, it is calculated or found using a specific method. And the writeToFile method calls all other methods to create a tuple for each station and write to file.
+
+The tester class calls methods in the analyzer and summary classes to print readable messages for the user.
+
+
